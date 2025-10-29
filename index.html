@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Saloua Mailho - AI ACCESS">
+    <meta name="copyright" content="© 2025 Saloua Mailho. Tous droits réservés. Document confidentiel.">
+    <meta name="description" content="Guide d'automatisation d'audits par email - Support interne AI ACCESS">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Guide : Automatisez le Traitement de vos Emails Professionnels avec l'IA | AI ACCESS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            height: 8px;
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .step {
+            margin: 30px 0;
+            padding: 30px;
+            border-left: 5px solid #667eea;
+            background: #f9f9f9;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .step h2 {
+            display: inline-block;
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .step h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .objective {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .action-box {
+            background: #d1ecf1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .tip {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .checklist li {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 5px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist li:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+        
+        .checklist li.checked {
+            background: #d4edda;
+            border-color: #28a745;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .checklist li::before {
+            content: "☐ ";
+            font-size: 1.3em;
+            margin-right: 10px;
+            color: #667eea;
+        }
+        
+        .checklist li.checked::before {
+            content: "☑ ";
+            color: #28a745;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px 10px 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+        
+        .intro {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .intro-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .time-estimate {
+            background: #e3f2fd;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #1976d2;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+            color: white;
+            padding: 25px 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .footer-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-info h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+        
+        .footer-contact a {
+            color: #667eea;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-contact a:hover {
+            color: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .copyright {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Automatisez le Traitement de vos Emails Professionnels</h1>
+            <p>Transformez vos emails en rapports structurés avec Claude AI, Zapier & SharePoint</p>
+            <div class="time-estimate">⏱️ Temps estimé : 60-90 minutes</div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+        
+        <div class="content">
+            <!-- INTRODUCTION -->
+            <div class="step active" id="step0">
+                <div class="intro">
+                    <h2>Bienvenue ! 👋</h2>
+                    <p style="font-size: 1.1em; margin: 20px 0;">Dans ce guide, vous allez créer un système automatisé qui :</p>
+                    
+                    <div class="intro-cards">
+                        <div class="card">
+                            <div class="card-icon">📧</div>
+                            <h3>Détecte</h3>
+                            <p>Les emails d'audit automatiquement</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🤖</div>
+                            <h3>Analyse</h3>
+                            <p>Avec l'intelligence de Claude AI</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📊</div>
+                            <h3>Génère</h3>
+                            <p>Des rapports structurés</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📁</div>
+                            <h3>Classe</h3>
+                            <p>Dans SharePoint automatiquement</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">✉️</div>
+                            <h3>Notifie</h3>
+                            <p>Vos clients instantanément</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-box">
+                        <h3>✅ Avant de commencer, vérifiez que vous avez :</h3>
+                        <ul class="checklist">
+                            <li>Un compte Zapier (gratuit suffit pour débuter)</li>
+                            <li>Votre compte Claude Pro (celui que vous utilisez actuellement)</li>
+                            <li>Un compte Outlook / Microsoft 365</li>
+                            <li>Un accès SharePoint avec droits d'écriture</li>
+                            <li>60-90 minutes devant vous</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip">
+                        <strong>💡 Conseil :</strong> Gardez tous vos onglets ouverts (Zapier, Outlook, SharePoint) pour basculer facilement entre les étapes.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 1 -->
+            <div class="step" id="step1">
+                <span class="step-number">1</span>
+                <h2>Préparez vos consignes d'analyse</h2>
+                
+                <div class="objective">
+                    <strong>🎯 Pourquoi cette étape ?</strong><br>
+                    Claude AI a besoin d'instructions claires pour analyser correctement vos emails. Sans consignes précises, les résultats seront incohérents.
+                </div>
+                
+                <h3>Ce que vous allez faire :</h3>
+                <p>Créer un document texte contenant vos règles d'analyse. Ce document servira de "mode d'emploi" pour Claude.</p>
+                
+                <div class="action-box">
+                    <h3>✍️ Action à réaliser maintenant</h3>
+                    <p><strong>Ouvrez un document texte</strong> (Word, Notion, Google Doc ou même Bloc-notes) et <strong>choisissez LE MODÈLE adapté à votre cas d'usage</strong> :</p>
+                    
+                    <h4 style="color: #667eea; margin-top: 20px;">📋 MODÈLE 1 : Analyse d'Audit / Conformité</h4>
+                    <div class="code-block">🔍 CONSIGNES D'ANALYSE AUDIT
+
+1. Objectif de l'analyse
+   - Vérifier la conformité RGPD
+   - Identifier les risques de sécurité
+   - Contrôler la présence des mentions légales
+
+2. Éléments OBLIGATOIRES à rechercher
+   ✓ Consentement explicite des utilisateurs
+   ✓ Mentions légales complètes
+   ✓ Politique de confidentialité accessible
+   ✓ Droit à l'oubli mentionné
+   ✓ Coordonnées du responsable de traitement
+
+3. Éléments à signaler si ABSENTS
+   ⚠️ Coordonnées du DPO
+   ⚠️ Procédure de réclamation CNIL
+   ⚠️ Durée de conservation des données
+
+4. Format de rapport attendu
+   - Synthèse exécutive (3 lignes max)
+   - Liste des points conformes
+   - Liste des éléments manquants avec criticité
+   - Recommandations prioritaires (top 3)
+                    </div>
+
+                    <h4 style="color: #667eea; margin-top: 20px;">💼 MODÈLE 2 : Demandes Commerciales / Devis</h4>
+                    <div class="code-block">🔍 CONSIGNES D'ANALYSE DEMANDE COMMERCIALE
+
+1. Objectif de l'analyse
+   - Qualifier le prospect (chaud/tiède/froid)
+   - Identifier les besoins précis
+   - Évaluer l'urgence et le budget
+
+2. Informations OBLIGATOIRES à extraire
+   ✓ Nom et entreprise du prospect
+   ✓ Nature exacte de la demande
+   ✓ Budget indicatif (si mentionné)
+   ✓ Délai souhaité
+   ✓ Coordonnées complètes
+
+3. Signaux d'urgence à détecter
+   ⚠️ Mots-clés : "urgent", "rapidement", "dès que possible"
+   ⚠️ Date limite mentionnée
+   ⚠️ Concurrence évoquée
+
+4. Format de rapport attendu
+   - Score de qualification (A/B/C)
+   - Résumé du besoin (2-3 lignes)
+   - Actions recommandées
+   - Proposition de réponse type
+                    </div>
+
+                    <h4 style="color: #667eea; margin-top: 20px;">🎫 MODÈLE 3 : Support Client / Réclamations</h4>
+                    <div class="code-block">🔍 CONSIGNES D'ANALYSE SUPPORT CLIENT
+
+1. Objectif de l'analyse
+   - Catégoriser le type de demande
+   - Évaluer le niveau de criticité
+   - Identifier les émotions (frustration, colère, neutre)
+
+2. Informations OBLIGATOIRES à extraire
+   ✓ Type de problème (technique/facturation/livraison/autre)
+   ✓ Numéro de commande ou référence client
+   ✓ Description précise du problème
+   ✓ Actions déjà tentées par le client
+   ✓ Attente du client (remboursement/échange/explication)
+
+3. Niveaux de priorité à attribuer
+   🔴 URGENT : Client mécontent, menace de partir, perte financière
+   🟡 MOYEN : Question technique, demande d'info
+   🟢 FAIBLE : Suggestion, remerciement, question générale
+
+4. Format de rapport attendu
+   - Catégorie et priorité
+   - Résumé du problème (2 lignes)
+   - Ton émotionnel détecté
+   - Réponse type suggérée
+   - Actions à mener
+                    </div>
+
+                    <h4 style="color: #667eea; margin-top: 20px;">👔 MODÈLE 4 : Candidatures / Recrutement</h4>
+                    <div class="code-block">🔍 CONSIGNES D'ANALYSE CANDIDATURE
+
+1. Objectif de l'analyse
+   - Évaluer l'adéquation profil/poste
+   - Identifier les compétences clés
+   - Détecter les signaux positifs/négatifs
+
+2. Éléments OBLIGATOIRES à extraire
+   ✓ Poste visé
+   ✓ Années d'expérience dans le domaine
+   ✓ Compétences techniques mentionnées
+   ✓ Disponibilité
+   ✓ Prétentions salariales (si mentionnées)
+
+3. Critères de qualification
+   ✅ Expérience pertinente dans le secteur
+   ✅ Compétences correspondant au poste
+   ✅ Motivation claire et personnalisée
+   ⚠️ Signaux d'alerte : fautes, email non professionnel, CV manquant
+
+4. Format de rapport attendu
+   - Score d'adéquation (1-10)
+   - Points forts du candidat
+   - Points de vigilance
+   - Recommandation (à inviter/refuser/attendre)
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    <strong>💡 Personnalisez le modèle choisi :</strong> Adaptez ces consignes à VOTRE contexte spécifique. Ajoutez vos propres critères, modifiez les priorités, adaptez le vocabulaire à votre secteur d'activité.
+                </div>
+                
+                <div class="warning">
+                    <strong>⚠️ Important :</strong> Gardez ce document accessible. Vous allez le copier-coller dans Zapier à l'étape 3.
+                </div>
+                
+                <h3>✅ Checklist de validation :</h3>
+                <ul class="checklist">
+                    <li>J'ai ouvert un document texte</li>
+                    <li>J'ai choisi le modèle correspondant à mon cas d'usage</li>
+                    <li>J'ai personnalisé les critères selon mon activité</li>
+                    <li>J'ai enregistré le document dans un endroit accessible</li>
+                </ul>
+            </div>
+
+            <!-- ÉTAPE 2 -->
+            <div class="step" id="step2">
+                <span class="step-number">2</span>
+                <h2>Connectez Outlook à Zapier</h2>
+                
+                <div class="objective">
+                    <strong>🎯 Objectif :</strong><br>
+                    Faire en sorte que Zapier détecte automatiquement les emails contenant vos mots-clés (comme "audit", "conformité", etc.)
+                </div>
+                
+                <h3>Étapes détaillées :</h3>
+                
+                <div class="action-box">
+                    <h3>📝 Action 1 : Créer votre premier Zap</h3>
+                    <ol style="line-height: 2;">
+                        <li>Allez sur <a href="https://zapier.com" target="_blank" style="color: #667eea; font-weight: bold;">zapier.com</a></li>
+                        <li>Connectez-vous (ou créez un compte gratuit)</li>
+                        <li>Cliquez sur le bouton orange <strong>"Create Zap"</strong> en haut à droite</li>
+                        <li>Vous arrivez sur une page blanche avec "1. Trigger" → parfait !</li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 2 : Choisir le déclencheur Outlook</h3>
+                    <ol style="line-height: 2;">
+                        <li>Dans le champ de recherche, tapez <strong>"Outlook"</strong></li>
+                        <li>Cliquez sur l'application <strong>Microsoft Outlook</strong></li>
+                        <li>Choisissez l'événement : <strong>"New Email Matching Search"</strong> (ou "New Email" si vous ne trouvez pas)</li>
+                        <li>Cliquez sur <strong>"Continue"</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 3 : Connecter votre compte Outlook</h3>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur <strong>"Sign in to Microsoft Outlook"</strong></li>
+                        <li>Une fenêtre Microsoft va s'ouvrir</li>
+                        <li>Entrez vos identifiants Outlook habituels</li>
+                        <li>Autorisez Zapier à accéder à vos emails (ne vous inquiétez pas, c'est sécurisé)</li>
+                        <li>Vous revenez sur Zapier → votre compte est connecté ✅</li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 4 : Configurer le filtre de mots-clés</h3>
+                    <p>Zapier vous demande maintenant de paramétrer QUELS emails doivent déclencher l'automatisation :</p>
+                    
+                    <ul style="line-height: 2; margin: 15px 0;">
+                        <li><strong>Folder</strong> : Sélectionnez "Inbox" (Boîte de réception)</li>
+                        <li><strong>Search Query</strong> : Copiez-collez ceci :</li>
+                    </ul>
+                    
+                    <div class="code-block">subject:devis OR subject:demande OR body:conformité OR body:audit OR subject:candidature OR subject:support</div>
+                    
+                    <p style="margin-top: 15px;"><em>Cette formule dit à Zapier : "Déclenche l'automatisation si le sujet contient 'devis', 'demande', 'candidature' ou 'support', OU si le corps contient 'conformité' ou 'audit'"</em></p>
+                </div>
+                
+                <div class="tip">
+                    <strong>💡 Personnalisez vos mots-clés :</strong> Remplacez par les termes que VOS clients/prospects utilisent réellement dans leurs emails. 
+                    <br><br>
+                    <strong>Exemples par cas d'usage :</strong><br>
+                    • <strong>Support :</strong> "problème", "bug", "ne fonctionne pas", "erreur"<br>
+                    • <strong>Commercial :</strong> "tarif", "prix", "devis", "information"<br>
+                    • <strong>Recrutement :</strong> "candidature", "CV", "poste", "emploi"<br>
+                    • <strong>Audit :</strong> "conformité", "vérification", "contrôle", "analyse"
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 5 : Tester le déclencheur</h3>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur <strong>"Test trigger"</strong></li>
+                        <li>Zapier va chercher dans votre boîte mail un email qui correspond</li>
+                        <li><strong>Si rien ne s'affiche</strong> : envoyez-vous un email de test avec le mot "audit" dans le sujet</li>
+                        <li>Attendez 1-2 minutes et cliquez à nouveau sur "Test trigger"</li>
+                        <li>Vous devez voir apparaître l'email de test ✅</li>
+                        <li>Cliquez sur <strong>"Continue"</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    <strong>⚠️ Problème fréquent :</strong> Si Zapier ne trouve aucun email, vérifiez que vous avez bien reçu un email contenant les mots-clés configurés dans les dernières 24h.
+                </div>
+                
+                <h3>✅ Checklist de validation :</h3>
+                <ul class="checklist">
+                    <li>J'ai créé un Zap sur Zapier</li>
+                    <li>J'ai connecté mon compte Outlook</li>
+                    <li>J'ai configuré les mots-clés de recherche</li>
+                    <li>Le test du déclencheur fonctionne (j'ai vu un email)</li>
+                </ul>
+            </div>
+
+            <!-- ÉTAPE 3 -->
+            <div class="step" id="step3">
+                <span class="step-number">3</span>
+                <h2>Connectez Claude AI pour l'analyse</h2>
+                
+                <div class="objective">
+                    <strong>🎯 Objectif :</strong><br>
+                    Envoyer le contenu de l'email à Claude AI pour qu'il l'analyse selon vos consignes et génère un rapport structuré.
+                </div>
+                
+                <h3>Étapes détaillées :</h3>
+                
+                <div class="action-box">
+                    <h3>📝 Action 1 : Ajouter l'action Claude</h3>
+                    <ol style="line-height: 2;">
+                        <li>Dans votre Zap, cliquez sur le <strong>"+"</strong> pour ajouter une action</li>
+                        <li>Dans la barre de recherche, tapez <strong>"Claude"</strong> ou <strong>"Anthropic"</strong></li>
+                        <li>Sélectionnez l'application <strong>"Claude (Anthropic)"</strong></li>
+                        <li>Choisissez l'action : <strong>"Create Message"</strong> ou <strong>"Send Prompt"</strong></li>
+                        <li>Cliquez sur <strong>"Continue"</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    <strong>⚠️ Si Claude n'apparaît pas dans Zapier :</strong><br>
+                    C'est normal ! Claude n'a pas encore d'intégration native officielle. Utilisez plutôt l'option <strong>"Webhooks by Zapier"</strong> avec l'API Claude. Mais c'est plus technique. Contactez votre prestataire pour cette partie si vous bloquez.
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 2 : Connecter votre API Claude</h3>
+                    <ol style="line-height: 2;">
+                        <li>Allez sur <a href="https://console.anthropic.com" target="_blank" style="color: #667eea; font-weight: bold;">console.anthropic.com</a></li>
+                        <li>Connectez-vous avec votre compte Claude Pro</li>
+                        <li>Allez dans <strong>"API Keys"</strong> dans le menu</li>
+                        <li>Cliquez sur <strong>"Create Key"</strong></li>
+                        <li><strong>Copiez la clé</strong> qui apparaît (elle ne s'affichera qu'une seule fois !)</li>
+                        <li>Revenez sur Zapier et collez cette clé dans le champ demandé</li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 3 : Configurer le prompt (LA PARTIE CRITIQUE)</h3>
+                    <p>C'est ici que vous allez "programmer" Claude. Voici le template <strong>universel et adaptable</strong> :</p>
+                    
+                    <div class="code-block">Tu es un assistant expert en analyse d'emails professionnels. Analyse l'email suivant selon ces consignes strictes :
+
+[📋 COLLEZ ICI VOS CONSIGNES D'ANALYSE DE L'ÉTAPE 1]
+(Remplacez cette ligne par le modèle que vous avez choisi : audit, commercial, support, recrutement, etc.)
+
+---
+
+📧 EMAIL À ANALYSER :
+
+**Sujet :** {{Outlook__Subject}}
+**Expéditeur :** {{Outlook__From}}
+**Date de réception :** {{Outlook__Date}}
+**Contenu complet :**
+{{Outlook__Body}}
+
+---
+
+📊 GÉNÈRE UN RAPPORT AU FORMAT SUIVANT :
+
+# RAPPORT D'ANALYSE - {{Outlook__From}}
+
+## 📋 Synthèse Rapide
+[2-3 lignes résumant l'essentiel de l'email et l'action requise]
+
+## 🔍 Analyse Détaillée
+[Analyse selon vos consignes personnalisées]
+
+## ✅ Éléments Identifiés
+- [Information clé 1]
+- [Information clé 2]
+- [etc.]
+
+## ⚠️ Points d'Attention / Éléments Manquants
+### 🔴 Criticité HAUTE
+- [Élément critique 1 si applicable]
+
+### 🟡 Criticité MOYENNE
+- [Élément moyen 1 si applicable]
+
+### 🟢 Criticité BASSE / Remarques
+- [Élément mineur 1 si applicable]
+
+## 🎯 Actions Recommandées
+1. [Action prioritaire 1 - Délai suggéré]
+2. [Action prioritaire 2 - Délai suggéré]
+3. [Action prioritaire 3 - Délai suggéré]
+
+## 💬 Suggestion de Réponse
+[Proposition de réponse type à envoyer au client/prospect]
+
+---
+📅 Date d'analyse : {{Zap__Date}}
+🤖 Généré automatiquement par Claude AI
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Exemples de personnalisation selon votre cas :</strong><br><br>
+                        
+                        <strong>Pour du SUPPORT CLIENT</strong>, ajoutez dans le prompt :<br>
+                        <code>Détecte le ton émotionnel (neutre/frustré/en colère) et adapte la suggestion de réponse en conséquence.</code><br><br>
+                        
+                        <strong>Pour du COMMERCIAL</strong>, ajoutez :<br>
+                        <code>Attribue un score de qualification de A (très chaud) à C (à recontacter plus tard) et justifie ce score.</code><br><br>
+                        
+                        <strong>Pour du RECRUTEMENT</strong>, ajoutez :<br>
+                        <code>Évalue l'adéquation profil/poste sur 10 et liste 3 questions à poser en entretien.</code>
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    <strong>💡 Explication des {{variables}} :</strong><br>
+                    - <code>{{Outlook__Subject}}</code> = Le sujet de l'email reçu<br>
+                    - <code>{{Outlook__Body}}</code> = Le contenu de l'email<br>
+                    - <code>{{Zap__Date}}</code> = La date du jour<br>
+                    <br>
+                    Zapier remplace automatiquement ces variables par les vraies données !
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 4 : Insérer les variables dynamiques</h3>
+                    <p>Pour ajouter les variables ({{Outlook__Subject}}, etc.) :</p>
+                    <ol style="line-height: 2;">
+                        <li>Placez votre curseur à l'endroit où vous voulez la variable</li>
+                        <li>Cliquez sur l'icône <strong>"+"</strong> ou <strong>"Insert Data"</strong> à droite</li>
+                        <li>Sélectionnez l'étape "Outlook" puis le champ voulu (Subject, Body, From, etc.)</li>
+                        <li>La variable s'insère automatiquement</li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 5 : Tester l'analyse Claude</h3>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur <strong>"Test step"</strong></li>
+                        <li>Zapier va envoyer l'email de test à Claude</li>
+                        <li>Attendez 5-15 secondes</li>
+                        <li>Vous devez voir apparaître un rapport structuré généré par Claude ✅</li>
+                        <li><strong>Vérifiez que</strong> : le rapport est cohérent, bien structuré, et suit vos consignes</li>
+                        <li>Si le format ne vous plaît pas, modifiez le prompt et retestez</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    <strong>⚠️ Si Claude répond n'importe quoi :</strong><br>
+                    Vos consignes ne sont pas assez précises. Ajoutez plus d'exemples concrets dans votre prompt. Par exemple : "Un élément conforme signifie qu'on trouve explicitement le texte 'consentement explicite' ou une formulation similaire". Adaptez selon votre cas d'usage (support, commercial, etc.).
+                </div>
+                
+                <h3>✅ Checklist de validation :</h3>
+                <ul class="checklist">
+                    <li>J'ai connecté mon API Claude à Zapier</li>
+                    <li>J'ai copié le prompt complet avec mes consignes</li>
+                    <li>J'ai inséré les variables dynamiques Outlook</li>
+                    <li>Le test fonctionne et Claude génère un rapport cohérent</li>
+                </ul>
+            </div>
+
+            <!-- ÉTAPE 4 -->
+            <div class="step" id="step4">
+                <span class="step-number">4</span>
+                <h2>Classez le rapport dans SharePoint</h2>
+                
+                <div class="objective">
+                    <strong>🎯 Objectif :</strong><br>
+                    Créer automatiquement un fichier contenant le rapport Claude et le ranger dans le bon dossier SharePoint.
+                </div>
+                
+                <h3>Préparation : Créez votre structure de dossiers</h3>
+                
+                <div class="action-box">
+                    <h3>📝 Avant de continuer dans Zapier</h3>
+                    <p>Ouvrez SharePoint et créez cette structure de dossiers (adaptez selon votre activité) :</p>
+                    
+                    <div class="code-block">📁 Analyses_Emails/
+   📁 2025/
+      📁 Janvier/
+      📁 Février/
+      📁 Mars/
+      ... (créez tous les mois de l'année)
+                    </div>
+                    
+                    <p style="margin-top: 15px;"><strong>Ou selon votre cas d'usage :</strong></p>
+                    <ul style="line-height: 2;">
+                        <li>📁 <strong>Support_Client/</strong> → pour les tickets support</li>
+                        <li>📁 <strong>Demandes_Commerciales/</strong> → pour les devis/prospects</li>
+                        <li>📁 <strong>Candidatures/</strong> → pour le recrutement</li>
+                        <li>📁 <strong>Audits_Conformite/</strong> → pour les audits</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Comment faire :</strong></p>
+                    <ol style="line-height: 2;">
+                        <li>Allez sur votre site SharePoint</li>
+                        <li>Cliquez sur <strong>"Documents"</strong> ou <strong>"Bibliothèque de documents"</strong></li>
+                        <li>Cliquez sur <strong>"+ Nouveau"</strong> → <strong>"Dossier"</strong></li>
+                        <li>Créez "Audits", puis à l'intérieur créez "2025", puis les mois</li>
+                    </ol>
+                </div>
+                
+                <h3>Configuration dans Zapier :</h3>
+                
+                <div class="action-box">
+                    <h3>📝 Action 1 : Ajouter l'action SharePoint</h3>
+                    <ol style="line-height: 2;">
+                        <li>Dans votre Zap, cliquez sur le <strong>"+"</strong> pour ajouter une nouvelle action</li>
+                        <li>Cherchez <strong>"SharePoint"</strong></li>
+                        <li>Sélectionnez <strong>Microsoft SharePoint</strong></li>
+                        <li>Choisissez l'action : <strong>"Create File"</strong></li>
+                        <li>Cliquez sur <strong>"Continue"</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 2 : Connecter SharePoint</h3>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur <strong>"Sign in to Microsoft SharePoint"</strong></li>
+                        <li>Entrez vos identifiants Microsoft (les mêmes qu'Outlook)</li>
+                        <li>Autorisez Zapier à accéder à SharePoint</li>
+                        <li>Vous revenez sur Zapier → compte connecté ✅</li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 3 : Configurer l'emplacement du fichier</h3>
+                    <p>Zapier va vous demander où créer le fichier :</p>
+                    
+                    <ul style="line-height: 2; margin: 15px 0;">
+                        <li><strong>Site :</strong> Sélectionnez votre site SharePoint dans la liste</li>
+                        <li><strong>Drive :</strong> Généralement "Documents" (sélectionnez dans la liste)</li>
+                        <li><strong>Folder Path :</strong> Tapez : <code>/Analyses_Emails/2025/Janvier/</code> (adaptez le nom de dossier et le mois)</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <strong>💡 Astuce avancée :</strong> Pour que le dossier change automatiquement selon le mois, utilisez une formule Zapier dans "Folder Path" : <code>/Analyses_Emails/2025/{{zap_meta_human_now__month_name}}/</code>
+                    </div>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 4 : Nommer le fichier intelligemment</h3>
+                    <p>Dans le champ <strong>"File Name"</strong>, utilisez ce format :</p>
+                    
+                    <div class="code-block">Rapport_{{Outlook__From}}_{{zap_meta_human_now__date}}.txt</div>
+                    
+                    <p style="margin-top: 15px;"><strong>Résultat :</strong> Un fichier nommé par exemple <em>"Rapport_client@exemple.com_29-10-2025.txt"</em></p>
+                    
+                    <p><strong>Ou selon votre activité :</strong></p>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Support :</strong> <code>Ticket_{{Outlook__From}}_{{zap_meta_human_now__date}}.txt</code></li>
+                        <li><strong>Commercial :</strong> <code>Devis_{{Outlook__From}}_{{zap_meta_human_now__date}}.txt</code></li>
+                        <li><strong>RH :</strong> <code>Candidature_{{Outlook__From}}_{{zap_meta_human_now__date}}.txt</code></li>
+                        <li><strong>Audit :</strong> <code>Audit_{{Outlook__From}}_{{zap_meta_human_now__date}}.txt</code></li>
+                    </ul>
+                    
+                    <p><strong>Pour insérer les variables :</strong> Cliquez sur "+" à droite du champ et sélectionnez :</p>
+                    <ul style="line-height: 1.8;">
+                        <li><code>Outlook__From</code> = email de l'expéditeur</li>
+                        <li><code>zap_meta_human_now__date</code> = date du jour</li>
+                    </ul>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 5 : Insérer le contenu du rapport</h3>
+                    <p>Dans le champ <strong>"File Content"</strong> :</p>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur l'icône <strong>"+"</strong> (Insert Data)</li>
+                        <li>Sélectionnez l'étape <strong>"Claude"</strong></li>
+                        <li>Choisissez le champ contenant le rapport (généralement "Response" ou "Content")</li>
+                        <li>La variable s'insère automatiquement</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    <strong>⚠️ Limitation format :</strong> Cette méthode crée un fichier .txt (texte brut). Si vous voulez du PDF ou Word, il faudra ajouter une étape supplémentaire avec un outil comme CloudConvert (plus avancé, demandez de l'aide à votre prestataire si besoin).
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 6 : Tester la création du fichier</h3>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur <strong>"Test step"</strong></li>
+                        <li>Zapier va créer un fichier test dans SharePoint</li>
+                        <li><strong>Allez vérifier dans SharePoint</strong> que le fichier apparaît bien</li>
+                        <li>Ouvrez-le pour vérifier qu'il contient bien le rapport Claude</li>
+                        <li>Si tout est OK : cliquez sur <strong>"Continue"</strong> ✅</li>
+                    </ol>
+                </div>
+                
+                <h3>✅ Checklist de validation :</h3>
+                <ul class="checklist">
+                    <li>J'ai créé la structure de dossiers dans SharePoint</li>
+                    <li>J'ai connecté SharePoint à Zapier</li>
+                    <li>J'ai configuré l'emplacement du fichier</li>
+                    <li>Le nom du fichier est dynamique et clair</li>
+                    <li>Le test fonctionne : un fichier apparaît dans SharePoint avec le rapport</li>
+                </ul>
+            </div>
+
+            <!-- ÉTAPE 5 -->
+            <div class="step" id="step5">
+                <span class="step-number">5</span>
+                <h2>Notifiez automatiquement le client</h2>
+                
+                <div class="objective">
+                    <strong>🎯 Objectif :</strong><br>
+                    Envoyer un email automatique au client/prospect pour l'informer que son rapport d'analyse est prêt et disponible dans SharePoint.
+                </div>
+                
+                <h3>Configuration :</h3>
+                
+                <div class="action-box">
+                    <h3>📝 Action 1 : Ajouter l'envoi d'email</h3>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur le <strong>"+"</strong> pour ajouter une dernière action</li>
+                        <li>Cherchez <strong>"Outlook"</strong> (oui, encore une fois !)</li>
+                        <li>Choisissez l'action : <strong>"Send Email"</strong></li>
+                        <li>Votre compte Outlook est déjà connecté ✅</li>
+                        <li>Cliquez sur <strong>"Continue"</strong></li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 2 : Configurer le destinataire</h3>
+                    <p>Dans le champ <strong>"To"</strong> :</p>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur l'icône <strong>"+"</strong> (Insert Data)</li>
+                        <li>Sélectionnez l'étape <strong>"Outlook"</strong> (le déclencheur du début)</li>
+                        <li>Choisissez <strong>"From"</strong> (= l'email de l'expéditeur initial)</li>
+                    </ol>
+                    <p style="margin-top: 10px;"><em>Résultat : Le client qui vous a envoyé l'email initial recevra automatiquement la notification</em></p>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 3 : Rédiger l'objet de l'email</h3>
+                    <p>Dans le champ <strong>"Subject"</strong>, adaptez selon votre cas d'usage :</p>
+                    
+                    <div class="code-block">✅ Votre analyse est prête - {{zap_meta_human_now__date}}</div>
+                    
+                    <p style="margin-top: 10px;"><strong>Ou plus spécifique selon votre activité :</strong></p>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Support :</strong> "✅ Votre ticket a été traité - Réf {{Outlook__Subject}}"</li>
+                        <li><strong>Commercial :</strong> "✅ Votre demande de devis - Réponse détaillée"</li>
+                        <li><strong>RH :</strong> "✅ Accusé réception de votre candidature"</li>
+                        <li><strong>Audit :</strong> "✅ Votre rapport d'audit est prêt"</li>
+                    </ul>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 4 : Rédiger le corps de l'email</h3>
+                    <p>Dans le champ <strong>"Body"</strong>, voici des templates selon votre cas d'usage :</p>
+                    
+                    <h4 style="color: #667eea; margin-top: 20px;">📋 TEMPLATE GÉNÉRIQUE (Adaptable)</h4>
+                    <div class="code-block">Bonjour,
+
+Votre demande a été analysée automatiquement par notre système intelligent.
+
+📄 **Le rapport complet est disponible sur SharePoint**
+Vous le trouverez dans le dossier : [Nom_Dossier]/2025/[Mois en cours]
+
+📌 **Résumé rapide :**
+{{Claude__Response__Summary}}
+
+🎯 **Prochaines étapes :**
+- Consultez le rapport complet dans SharePoint
+- Prenez connaissance des recommandations
+- Contactez-nous si vous avez des questions
+
+💬 **Besoin d'aide ?**
+Répondez simplement à cet email ou appelez-nous.
+
+Cordialement,
+[Votre prénom]
+[Votre entreprise]
+
+---
+🤖 Email généré automatiquement - {{zap_meta_human_now__datetime}}
+                    </div>
+
+                    <h4 style="color: #667eea; margin-top: 20px;">🎫 TEMPLATE SUPPORT CLIENT</h4>
+                    <div class="code-block">Bonjour,
+
+Votre demande de support a bien été reçue et analysée.
+
+📄 **Numéro de ticket :** {{Outlook__Subject}}
+⏱️ **Temps de traitement estimé :** [À personnaliser selon priorité]
+
+📌 **Analyse de votre demande :**
+{{Claude__Response__Summary}}
+
+🔧 **Actions en cours :**
+Notre équipe technique examine votre cas et reviendra vers vous sous 24-48h.
+
+💬 **Questions ?**
+Répondez à cet email avec la référence : {{Outlook__Subject}}
+
+Cordialement,
+L'équipe Support
+                    </div>
+
+                    <h4 style="color: #667eea; margin-top: 20px;">💼 TEMPLATE COMMERCIAL</h4>
+                    <div class="code-block">Bonjour,
+
+Merci pour votre demande de devis/information.
+
+📄 **Votre demande a été qualifiée**
+Un commercial va prendre contact avec vous sous 24-48h.
+
+📌 **Résumé de votre besoin :**
+{{Claude__Response__Summary}}
+
+🎯 **Prochaines étapes :**
+- Analyse détaillée de votre projet
+- Préparation d'une proposition personnalisée
+- Prise de rendez-vous pour échanger
+
+💬 **Urgent ?**
+Contactez-nous au [Téléphone] ou répondez à cet email.
+
+Cordialement,
+[Prénom] - Équipe Commerciale
+                    </div>
+
+                    <h4 style="color: #667eea; margin-top: 20px;">👔 TEMPLATE RECRUTEMENT</h4>
+                    <div class="code-block">Bonjour,
+
+Nous avons bien reçu votre candidature et vous en remercions.
+
+📄 **Votre profil a été analysé**
+Notre équipe RH va étudier votre dossier attentivement.
+
+📌 **Poste concerné :** {{Outlook__Subject}}
+
+🎯 **Suite du processus :**
+- Si votre profil correspond, nous vous contacterons sous 7-10 jours
+- Sinon, votre candidature sera conservée pour futures opportunités
+
+💬 **Questions sur le poste ?**
+N'hésitez pas à répondre à cet email.
+
+Cordialement,
+L'équipe Recrutement
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    <strong>💡 Personnalisez l'email :</strong> Adaptez le ton, ajoutez votre signature, vos coordonnées, un lien vers votre site, etc. C'est VOTRE communication client !
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 5 (Optionnel) : Ajouter un lien direct SharePoint</h3>
+                    <p>Si vous voulez que le client puisse cliquer directement sur un lien vers le fichier :</p>
+                    <ol style="line-height: 2;">
+                        <li>Dans le corps de l'email, placez votre curseur où vous voulez le lien</li>
+                        <li>Cliquez sur <strong>"+"</strong> → Sélectionnez l'étape <strong>"SharePoint"</strong></li>
+                        <li>Choisissez le champ <strong>"Web URL"</strong> ou <strong>"Link to Item"</strong></li>
+                        <li>Le lien s'insère automatiquement</li>
+                    </ol>
+                    
+                    <p style="margin-top: 10px;"><strong>Exemple de texte :</strong></p>
+                    <div class="code-block">Accédez directement à votre rapport ici : {{SharePoint__Web_URL}}</div>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Action 6 : Tester l'envoi de l'email</h3>
+                    <ol style="line-height: 2;">
+                        <li>Cliquez sur <strong>"Test step"</strong></li>
+                        <li>Zapier va envoyer un email de test</li>
+                        <li><strong>Vérifiez dans votre boîte mail</strong> que vous avez bien reçu l'email</li>
+                        <li>Vérifiez que le contenu est correct, que le lien fonctionne</li>
+                        <li>Si tout est OK ✅</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    <strong>⚠️ Attention à la confidentialité :</strong> Ne mettez JAMAIS de données sensibles complètes dans l'email. Privilégiez un résumé très court et renvoyez vers le rapport complet dans SharePoint (sécurisé).
+                </div>
+                
+                <h3>✅ Checklist de validation :</h3>
+                <ul class="checklist">
+                    <li>J'ai configuré le destinataire automatique</li>
+                    <li>L'objet de l'email est clair et professionnel</li>
+                    <li>Le corps de l'email contient les infos essentielles</li>
+                    <li>Le lien SharePoint fonctionne (si ajouté)</li>
+                    <li>Le test fonctionne : j'ai reçu l'email de notification</li>
+                </ul>
+            </div>
+
+            <!-- ÉTAPE 6 -->
+            <div class="step" id="step6">
+                <span class="step-number">6</span>
+                <h2>Testez et activez votre automatisation</h2>
+                
+                <div class="objective">
+                    <strong>🎯 Objectif :</strong><br>
+                    Vérifier que TOUT fonctionne de bout en bout, puis activer votre Zap pour qu'il tourne en autonomie.
+                </div>
+                
+                <h3>Test complet (crucial !) :</h3>
+                
+                <div class="action-box">
+                    <h3>📝 Test grandeur nature</h3>
+                    <ol style="line-height: 2;">
+                        <li><strong>Envoyez-vous un VRAI email de test</strong> depuis une autre adresse :
+                            <ul style="margin-left: 30px; margin-top: 10px;">
+                                <li>Mettez "audit" dans le sujet</li>
+                                <li>Écrivez un faux email de client demandant une analyse</li>
+                                <li>Incluez des éléments que Claude devrait détecter</li>
+                            </ul>
+                        </li>
+                        <li><strong>Attendez 2-5 minutes</strong> (le temps que Zapier détecte l'email)</li>
+                        <li><strong>Vérifiez dans SharePoint</strong> : le rapport est-il créé ?</li>
+                        <li><strong>Vérifiez votre boîte mail</strong> : avez-vous reçu la notification ?</li>
+                        <li><strong>Ouvrez le rapport</strong> : est-il cohérent et complet ?</li>
+                    </ol>
+                </div>
+                
+                <div class="warning">
+                    <strong>⚠️ Si ça ne fonctionne pas :</strong><br>
+                    <ol style="line-height: 1.8; margin-top: 10px;">
+                        <li>Allez dans <strong>"Zap History"</strong> (historique) dans Zapier</li>
+                        <li>Cherchez l'exécution qui a échoué</li>
+                        <li>Cliquez dessus pour voir l'erreur détaillée</li>
+                        <li>Les erreurs courantes :
+                            <ul style="margin-left: 30px; margin-top: 5px;">
+                                <li>⚠️ Chemin SharePoint incorrect → vérifiez l'orthographe exacte</li>
+                                <li>⚠️ Droits SharePoint insuffisants → demandez l'accès à votre admin</li>
+                                <li>⚠️ API Claude épuisée → vérifiez vos crédits</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Checklist finale avant activation</h3>
+                    <ul class="checklist">
+                        <li>Le déclencheur Outlook détecte bien les bons emails</li>
+                        <li>Claude génère un rapport structuré et pertinent</li>
+                        <li>Le fichier apparaît dans SharePoint au bon endroit</li>
+                        <li>L'email de notification est envoyé au bon destinataire</li>
+                        <li>Le contenu de l'email est professionnel et clair</li>
+                        <li>J'ai testé avec au moins 2 emails différents</li>
+                    </ul>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📝 Activer votre Zap</h3>
+                    <ol style="line-height: 2;">
+                        <li>En haut à droite de votre Zap, vous voyez un bouton <strong>OFF</strong></li>
+                        <li>Cliquez dessus pour passer en <strong>ON</strong></li>
+                        <li>Zapier vous demande de nommer votre Zap : choisissez un nom clair comme <strong>"Audit Email → Claude → SharePoint"</strong></li>
+                        <li>Confirmez l'activation</li>
+                        <li>🎉 <strong>Votre automatisation est ACTIVE !</strong></li>
+                    </ol>
+                </div>
+                
+                <h3>📊 Surveillance et optimisation :</h3>
+                
+                <div class="tip">
+                    <strong>💡 Bonnes pratiques post-activation :</strong><br>
+                    <ol style="line-height: 1.8; margin-top: 10px;">
+                        <li><strong>Première semaine</strong> : Vérifiez quotidiennement le "Zap History" pour détecter les erreurs</li>
+                        <li><strong>Gardez un œil sur votre quota Zapier</strong> : 100 tâches/mois en gratuit (chaque email = 4-5 tâches)</li>
+                        <li><strong>Affinez progressivement</strong> : Si Claude fait des erreurs, ajustez les consignes dans le prompt</li>
+                        <li><strong>Documentez les cas particuliers</strong> : Notez les emails qui posent problème pour améliorer le système</li>
+                        <li><strong>Testez avec différents types d'emails</strong> : Support, commercial, audit... selon votre activité</li>
+                    </ol>
+                </div>
+                
+                <div class="action-box">
+                    <h3>📈 Estimation de consommation</h3>
+                    <table>
+                        <tr>
+                            <th>Nombre d'emails/mois</th>
+                            <th>Tâches Zapier consommées</th>
+                            <th>Plan requis</th>
+                        </tr>
+                        <tr>
+                            <td>1-25 emails</td>
+                            <td>4-100 tâches</td>
+                            <td>✅ Gratuit (0€)</td>
+                        </tr>
+                        <tr>
+                            <td>25-187 emails</td>
+                            <td>100-750 tâches</td>
+                            <td>⚠️ Starter (30€/mois)</td>
+                        </tr>
+                        <tr>
+                            <td>187+ emails</td>
+                            <td>750+ tâches</td>
+                            <td>🔥 Professional (75€/mois)</td>
+                        </tr>
+                    </table>
+                    
+                    <p style="margin-top: 15px;"><em>Rappel : 1 email traité = 4-5 tâches (déclencheur + Claude + SharePoint + notification + éventuellement d'autres actions)</em></p>
+                </div>
+                
+                <h3>✅ Félicitations ! 🎉</h3>
+                <p style="font-size: 1.2em; padding: 20px; background: #d4edda; border-radius: 8px; text-align: center; margin-top: 20px;">
+                    <strong>Votre système d'automatisation d'emails est maintenant ACTIF !</strong><br>
+                    Chaque email contenant vos mots-clés sera analysé automatiquement par Claude,<br>
+                    un rapport sera généré et classé dans SharePoint,<br>
+                    et votre client/prospect sera notifié instantanément.
+                </p>
+            </div>
+
+            <!-- ÉTAPE 7 - BONUS -->
+            <div class="step" id="step7">
+                <span class="step-number">💡</span>
+                <h2>Optimisations & améliorations</h2>
+                
+                <div class="objective">
+                    <strong>🎯 Objectif :</strong><br>
+                    Aller plus loin une fois que votre système de base fonctionne parfaitement.
+                </div>
+                
+                <h3>🚀 Optimisations pour économiser des tâches Zapier :</h3>
+                
+                <div class="action-box">
+                    <h3>1️⃣ Filtrer les emails VIP uniquement</h3>
+                    <p><strong>Problème :</strong> Vous traitez tous les emails "audit", même ceux qui ne sont pas des vrais clients.</p>
+                    <p><strong>Solution :</strong> Ajouter un filtre Zapier après le déclencheur Outlook :</p>
+                    <ol style="line-height: 2; margin-top: 10px;">
+                        <li>Après l'étape Outlook, ajoutez une étape <strong>"Filter by Zapier"</strong></li>
+                        <li>Condition : <code>Outlook From</code> <strong>contains</strong> <code>@entreprise-cliente.com</code></li>
+                        <li>Ou créez une liste de domaines autorisés dans Airtable et vérifiez l'appartenance</li>
+                    </ol>
+                    <p style="margin-top: 10px;"><strong>Gain :</strong> Ne traiter que les vrais clients = économiser 50-70% des tâches</p>
+                </div>
+                
+                <div class="action-box">
+                    <h3>2️⃣ Regrouper les rapports quotidiens</h3>
+                    <p><strong>Problème :</strong> 10 emails = 10 fichiers séparés dans SharePoint.</p>
+                    <p><strong>Solution :</strong> Utiliser "Looping by Zapier" ou "Schedule by Zapier" :</p>
+                    <ol style="line-height: 2; margin-top: 10px;">
+                        <li>Stocker temporairement les rapports dans un Google Sheet</li>
+                        <li>1 fois par jour (ex: 18h), regrouper tous les rapports du jour en 1 seul fichier CSV</li>
+                        <li>Envoyer ce fichier unique dans SharePoint</li>
+                    </ol>
+                    <p style="margin-top: 10px;"><strong>Gain :</strong> 1 seule action SharePoint au lieu de 10 = économiser 9 tâches/jour</p>
+                </div>
+                
+                <h3>🎨 Améliorations de qualité :</h3>
+                
+                <div class="action-box">
+                    <h3>3️⃣ Générer des PDF professionnels</h3>
+                    <p><strong>Limite actuelle :</strong> Fichiers .txt bruts = peu professionnel.</p>
+                    <p><strong>Solution :</strong> Ajouter une conversion PDF :</p>
+                    <ol style="line-height: 2; margin-top: 10px;">
+                        <li>Avant l'étape SharePoint, ajoutez <strong>"CloudConvert"</strong> ou <strong>"DocuPilot"</strong></li>
+                        <li>Convertissez le texte de Claude en PDF avec mise en page</li>
+                        <li>Ajoutez votre logo, couleurs d'entreprise</li>
+                        <li>Envoyez le PDF final dans SharePoint</li>
+                    </ol>
+                    <p style="margin-top: 10px;"><strong>Coût supplémentaire :</strong> 1 tâche Zapier + abonnement CloudConvert (~10€/mois)</p>
+                </div>
+                
+                <div class="action-box">
+                    <h3>4️⃣ Scoring automatique des analyses</h3>
+                    <p><strong>Amélioration :</strong> Ajouter une note /100 pour prioriser les analyses critiques.</p>
+                    <p><strong>Ajout au prompt Claude (adaptez selon votre cas) :</strong></p>
+                    <div class="code-block">À la fin de ton rapport, ajoute :
+
+## 📊 Score d'Évaluation : [X]/100
+
+Exemples de calcul selon le cas d'usage :
+
+AUDIT/CONFORMITÉ :
+- 100 points = Tous les critères obligatoires présents
+- -10 points par élément critique manquant
+- -5 points par élément moyen manquant
+
+SUPPORT CLIENT :
+- 100 points = Problème simple et clair
+- -20 points si urgence critique détectée
+- -10 points si informations manquantes
+
+COMMERCIAL :
+- 100 points = Prospect très qualifié (budget + besoin + urgence)
+- 50-80 points = Prospect tiède (besoin mais sans urgence)
+- 0-50 points = Prospect froid (demande vague)
+                    </div>
+                </div>
+                
+                <div class="action-box">
+                    <h3>5️⃣ Historique centralisé dans Notion ou Airtable</h3>
+                    <p><strong>Utilité :</strong> Garder une trace de toutes les analyses effectuées.</p>
+                    <p><strong>Comment :</strong></p>
+                    <ol style="line-height: 2; margin-top: 10px;">
+                        <li>Après l'étape Claude, ajoutez une action <strong>"Airtable"</strong> ou <strong>"Notion"</strong></li>
+                        <li>Créez une ligne/page pour chaque analyse avec :
+                            <ul style="margin-left: 30px; margin-top: 5px;">
+                                <li>Date</li>
+                                <li>Client/Prospect (email)</li>
+                                <li>Type d'analyse (Support/Commercial/Audit/RH)</li>
+                                <li>Score d'évaluation</li>
+                                <li>Priorité (Haute/Moyenne/Basse)</li>
+                                <li>Lien vers le rapport SharePoint</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p style="margin-top: 10px;"><strong>Bénéfice :</strong> Tableau de bord pour suivre toutes vos demandes entrantes et leur évolution</p>
+                </div>
+                
+                <h3>🔥 Améliorations avancées (niveau expert) :</h3>
+                
+                <div class="action-box">
+                    <h3>6️⃣ Analyse des pièces jointes PDF</h3>
+                    <p><strong>Cas d'usage :</strong> Le client envoie un PDF à auditer (pas juste du texte dans l'email).</p>
+                    <p><strong>Solution technique :</strong></p>
+                    <ol style="line-height: 2; margin-top: 10px;">
+                        <li>Ajouter une étape <strong>"Formatter by Zapier"</strong> pour extraire les pièces jointes</li>
+                        <li>Utiliser <strong>"Parseur"</strong> ou <strong>"Adobe PDF Services"</strong> pour extraire le texte du PDF</li>
+                        <li>Envoyer ce texte à Claude au lieu du corps de l'email</li>
+                    </ol>
+                    <p style="margin-top: 10px;"><strong>⚠️ Complexité :</strong> Niveau avancé. Demandez de l'aide à un expert Zapier si besoin.</p>
+                </div>
+                
+                <div class="action-box">
+                    <h3>7️⃣ Multi-langues automatique</h3>
+                    <p><strong>Cas d'usage :</strong> Vous recevez des emails en français ET en anglais.</p>
+                    <p><strong>Ajout au prompt Claude :</strong></p>
+                    <div class="code-block">Détecte automatiquement la langue de l'email et réponds dans la MÊME langue.
+Si l'email est en anglais, génère le rapport en anglais.
+Si l'email est en français, génère le rapport en français.
+                    </div>
+                </div>
+                
+                <div class="action-box">
+                    <h3>8️⃣ Relance automatique si action requise</h3>
+                    <p><strong>Cas d'usage :</strong> Claude détecte des éléments critiques manquants ou une urgence → relancer automatiquement.</p>
+                    <p><strong>Comment :</strong></p>
+                    <ol style="line-height: 2; margin-top: 10px;">
+                        <li>Ajouter un <strong>"Filter by Zapier"</strong> après Claude</li>
+                        <li>Condition : Si le rapport contient "Criticité HAUTE" ou "URGENT"</li>
+                        <li>Ajouter un chemin alternatif ("Path by Zapier")</li>
+                        <li>Sur le chemin "critique" : envoyer un email de relance automatique</li>
+                    </ol>
+                    
+                    <p style="margin-top: 10px;"><strong>Exemples par cas d'usage :</strong></p>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Audit :</strong> Relance pour documents manquants critiques</li>
+                        <li><strong>Support :</strong> Escalade automatique si client mécontent</li>
+                        <li><strong>Commercial :</strong> Notification manager si prospect A+ détecté</li>
+                        <li><strong>RH :</strong> Alerte si profil parfait pour poste urgent</li>
+                    </ul>
+                </div>
+                
+                <h3>📚 Ressources pour aller plus loin :</h3>
+                
+                <div class="tip">
+                    <strong>🔗 Liens utiles :</strong><br>
+                    <ul style="line-height: 1.8; margin-top: 10px;">
+                        <li>📖 <a href="https://zapier.com/learn" target="_blank">Zapier Learn</a> - Tutoriels vidéo gratuits</li>
+                        <li>🤖 <a href="https://docs.anthropic.com" target="_blank">Documentation Claude API</a></li>
+                        <li>💬 <a href="https://community.zapier.com" target="_blank">Forum Zapier</a> - Aide communautaire</li>
+                        <li>🎓 <a href="https://www.youtube.com/c/zapier" target="_blank">Chaîne YouTube Zapier</a></li>
+                    </ul>
+                </div>
+                
+                <h3>🎯 Prochaines étapes recommandées :</h3>
+                
+                <ol style="line-height: 2; font-size: 1.1em; margin-top: 20px;">
+                    <li>✅ Faites tourner votre automatisation 1 mois sans modification</li>
+                    <li>📊 Analysez les résultats : taux d'erreur, satisfaction client, temps gagné</li>
+                    <li>🔧 Identifiez LA fonctionnalité qui apporterait le plus de valeur dans la liste ci-dessus</li>
+                    <li>🚀 Ajoutez-la progressivement (une amélioration = 1 semaine de test minimum)</li>
+                    <li>📈 Mesurez l'impact avant d'ajouter autre chose</li>
+                </ol>
+                
+                <div class="warning">
+                    <strong>⚠️ Règle d'or :</strong> Ne compliquez pas trop vite. Un système simple qui fonctionne à 100% vaut mieux qu'un système complexe qui plante régulièrement.
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)">← Précédent</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">Suivant →</button>
+            </div>
+        </div>
+        
+        <!-- Footer professionnel -->
+        <div class="footer">
+            <div class="footer-content">
+                <p style="font-size: 1em; margin: 0; line-height: 1.8;">
+                    📄 <strong>Support Interne - Usage Strictement Réservé</strong> | Ce guide a été conçu et développé par <strong>Saloua Mailho</strong> - Product Builder NoCode & IA | AI ACCESS<br>
+                    ✉️ <a href="mailto:saloua.mailho@aiaccess.fr" style="color: #667eea; text-decoration: none;">saloua.mailho@aiaccess.fr</a> &nbsp;&nbsp;&nbsp; 📱 <a href="tel:+33788092425" style="color: #667eea; text-decoration: none;">07 88 09 24 25</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 8; // 0 à 7
+        
+        function showStep(n) {
+            const steps = document.querySelectorAll('.step');
+            
+            if (n >= totalSteps) {
+                currentStep = totalSteps - 1;
+            }
+            if (n < 0) {
+                currentStep = 0;
+            }
+            
+            // Cache toutes les étapes
+            steps.forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Affiche l'étape actuelle
+            steps[currentStep].classList.add('active');
+            
+            // Scroll en haut
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            
+            // Met à jour la barre de progression
+            const progress = ((currentStep) / (totalSteps - 1)) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // Gestion des boutons
+            if (currentStep === 0) {
+                document.getElementById('prevBtn').style.visibility = 'hidden';
+            } else {
+                document.getElementById('prevBtn').style.visibility = 'visible';
+            }
+            
+            if (currentStep === totalSteps - 1) {
+                document.getElementById('nextBtn').textContent = '✅ Terminé !';
+                document.getElementById('nextBtn').onclick = function() {
+                    alert('🎉 Félicitations ! Vous avez terminé le guide. Votre système d\'automatisation est maintenant prêt à l\'emploi !');
+                };
+            } else {
+                document.getElementById('nextBtn').textContent = 'Suivant →';
+                document.getElementById('nextBtn').onclick = function() { changeStep(1); };
+            }
+        }
+        
+        function changeStep(n) {
+            currentStep += n;
+            showStep(currentStep);
+        }
+        
+        // Gestion des checklists interactives
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.matches('.checklist li')) {
+                e.target.classList.toggle('checked');
+            }
+        });
+        
+        // Initialisation
+        showStep(0);
+    </script>
+</body>
+</html>
